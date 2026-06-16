@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Think41 — Marketing Quick Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root,[data-theme="light"]{
+  --bg:#f6f5f1;--surf:#fff;--surf2:#faf9f6;--brd:#e0dcd5;
+  --ink:#1a1916;--ink2:#5a564f;--ink3:#9a958e;--inv:#f6f5f1;
+  --red:#b83226;--red-s:#fdf0ef;--red-m:#fad8d5;
+  --grn:#1c6e3e;--grn-s:#edf8f2;
+  --amb:#9a5a00;--amb-s:#fff4e0;
+  --font:'Inter',system-ui,sans-serif;
+  --r:8px;--sh:0 2px 8px rgba(26,25,22,.07);
+}
+[data-theme="dark"]{
+  --bg:#131210;--surf:#1b1a17;--surf2:#201f1c;--brd:#38362f;
+  --ink:#e8e4dc;--ink2:#a8a39a;--ink3:#6e6a62;--inv:#131210;
+  --red:#e05a4e;--red-s:rgba(184,50,38,.18);--red-m:rgba(184,50,38,.28);
+  --grn:#5ebd88;--grn-s:rgba(28,110,62,.2);
+  --amb:#f0a830;--amb-s:rgba(154,90,0,.2);
+  --sh:0 2px 8px rgba(0,0,0,.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:15px}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+
+.w{width:min(960px,calc(100% - 2.5rem));margin-inline:auto}
+
+/* NAV */
+.hdr{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--brd)}
+.hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:.7rem 0;gap:12px}
+.logo{font-size:14px;font-weight:800;letter-spacing:-.02em;flex-shrink:0}
+.logo span{color:var(--red)}
+.pills{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;flex:1;justify-content:center}
+.pills::-webkit-scrollbar{display:none}
+.pill{white-space:nowrap;font-size:11px;font-weight:600;padding:5px 12px;border-radius:99px;border:1px solid var(--brd);background:var(--surf);color:var(--ink2);transition:all .15s;cursor:pointer}
+.pill:hover,.pill.active{background:var(--ink);color:var(--inv);border-color:var(--ink)}
+.btn-theme{font-size:11px;font-weight:600;padding:5px 12px;border-radius:99px;border:1px solid var(--brd);background:var(--surf);white-space:nowrap;cursor:pointer;color:var(--ink2);flex-shrink:0}
+.btn-theme:hover{background:var(--ink);color:var(--inv)}
+
+/* SECTIONS */
+section{padding:48px 0;border-bottom:1px solid var(--brd)}
+section:last-of-type{border-bottom:0}
+.sec-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+h2{font-size:22px;font-weight:700;letter-spacing:-.02em;margin-bottom:20px;line-height:1.2}
+h3{font-size:14px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+
+/* VERDICT */
+.verdict{background:var(--surf);border:1px solid var(--brd);border-radius:12px;padding:28px 32px;margin-bottom:24px;box-shadow:var(--sh)}
+.verdict p{font-size:15px;color:var(--ink2);line-height:1.8}
+.verdict strong{color:var(--ink);font-weight:700}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:16px 18px;box-shadow:var(--sh)}
+.stat-n{font-size:24px;font-weight:800;letter-spacing:-.03em;color:var(--ink)}
+.stat-n.red{color:var(--red)}
+.stat-n.grn{color:var(--grn)}
+.stat-l{font-size:11px;color:var(--ink3);margin-top:3px;line-height:1.4}
+
+/* TIMELINE */
+.timeline{display:flex;gap:0;position:relative;margin-bottom:24px}
+.timeline::before{content:'';position:absolute;top:16px;left:0;right:0;height:2px;background:var(--brd);z-index:0}
+.tl-item{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1}
+.tl-dot{width:12px;height:12px;border-radius:50%;background:var(--ink);border:3px solid var(--bg);margin-bottom:10px;flex-shrink:0}
+.tl-dot.red{background:var(--red)}
+.tl-year{font-size:11px;font-weight:700;color:var(--red)}
+.tl-text{font-size:11px;color:var(--ink2);padding:0 8px;line-height:1.45;margin-top:3px}
+.founder-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+.founder-card{background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:12px 14px;box-shadow:var(--sh)}
+.founder-name{font-size:12px;font-weight:700}
+.founder-note{font-size:11px;color:var(--ink3);margin-top:2px}
+
+/* PRODUCTS */
+.prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.prod-card{background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:18px 20px;box-shadow:var(--sh)}
+.prod-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.prod-date{font-size:10px;color:var(--ink3);font-weight:600;margin-bottom:4px}
+.badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:99px;letter-spacing:.04em;white-space:nowrap}
+.badge.live{background:var(--grn-s);color:var(--grn)}
+.badge.open{background:var(--amb-s);color:var(--amb)}
+.badge.beta{background:var(--red-s);color:var(--red)}
+.prod-desc{font-size:12px;color:var(--ink2);line-height:1.58}
+.prod-quote{font-size:11px;color:var(--ink2);font-style:italic;border-left:2px solid var(--brd);padding-left:10px;margin-top:10px;line-height:1.55}
+.prod-tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;background:var(--surf2);border:1px solid var(--brd);color:var(--ink3);margin-top:8px;margin-right:4px}
+
+/* SWOT */
+.swot{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.swot-card{border-radius:var(--r);padding:16px 18px}
+.swot-card.s{background:var(--grn-s);border:1px solid rgba(28,110,62,.2)}
+.swot-card.w{background:var(--red-s);border:1px solid rgba(184,50,38,.15)}
+.swot-card.o{background:var(--amb-s);border:1px solid rgba(154,90,0,.2)}
+.swot-card.t{background:var(--surf2);border:1px solid var(--brd)}
+.swot-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.swot-card.s .swot-title{color:var(--grn)}
+.swot-card.w .swot-title{color:var(--red)}
+.swot-card.o .swot-title{color:var(--amb)}
+.swot-card.t .swot-title{color:var(--ink2)}
+.swot-list{list-style:none;font-size:12px;color:var(--ink2);display:flex;flex-direction:column;gap:5px}
+.swot-list li::before{content:'→ ';color:var(--ink3)}
+
+/* GAPS */
+.gap-list{display:flex;flex-direction:column;gap:8px}
+.gap-item{background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:14px 18px;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;box-shadow:var(--sh)}
+.gap-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.gap-dot.crit{background:var(--red)}
+.gap-dot.sig{background:var(--amb)}
+.gap-dot.mod{background:var(--grn)}
+.gap-name{font-size:13px;font-weight:600}
+.gap-fix{font-size:11px;color:var(--ink2);margin-top:3px}
+.gap-sev{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.gap-sev.crit{color:var(--red)}
+.gap-sev.sig{color:var(--amb)}
+.gap-sev.mod{color:var(--grn)}
+
+/* PLATFORMS */
+.plat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.plat{background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:12px 14px;box-shadow:var(--sh)}
+.plat-name{font-size:12px;font-weight:700;margin-bottom:3px}
+.plat-why{font-size:11px;color:var(--ink2)}
+.p-num{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:4px;display:inline-block;margin-bottom:6px}
+.p1{background:var(--red-s);color:var(--red)}
+.p2{background:var(--amb-s);color:var(--amb)}
+.p3{background:var(--surf2);color:var(--ink3)}
+
+/* PILLARS */
+.pillar-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.pillar{background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:14px 16px;box-shadow:var(--sh)}
+.pillar-icon{font-size:20px;margin-bottom:6px}
+.pillar-name{font-size:12px;font-weight:700;margin-bottom:4px}
+.pillar-ex{font-size:11px;color:var(--ink2)}
+
+/* DO / DON'T */
+.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.do-card{background:var(--grn-s);border:1px solid rgba(28,110,62,.2);border-radius:var(--r);padding:16px 18px}
+.dont-card{background:var(--red-s);border:1px solid rgba(184,50,38,.15);border-radius:var(--r);padding:16px 18px}
+.do-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--grn);margin-bottom:10px}
+.dont-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+.dd-list{list-style:none;font-size:12px;color:var(--ink2);display:flex;flex-direction:column;gap:5px}
+.dd-list li::before{content:'→ ';color:var(--ink3)}
+
+/* ROADMAP */
+.phases{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.phase{background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:14px 16px;box-shadow:var(--sh)}
+.phase-label{font-size:10px;font-weight:700;color:var(--red);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.phase-title{font-size:12px;font-weight:700;margin-bottom:8px}
+.phase-items{list-style:none;font-size:11px;color:var(--ink2);display:flex;flex-direction:column;gap:4px}
+.phase-items li::before{content:'· '}
+
+/* METRICS TABLE */
+.metrics-table{width:100%;border-collapse:collapse;font-size:12px}
+.metrics-table th{text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);padding:8px 12px;border-bottom:2px solid var(--brd)}
+.metrics-table td{padding:9px 12px;border-bottom:1px solid var(--brd);color:var(--ink2)}
+.metrics-table td:first-child{font-weight:600;color:var(--ink)}
+.metrics-table tr:last-child td{border-bottom:0}
+.metrics-table tr:hover td{background:var(--surf2)}
+
+/* BUDGET */
+.budget-band{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.b-card{background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:16px 20px;box-shadow:var(--sh)}
+.b-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.b-val{font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.b-sub{font-size:11px;color:var(--ink3);margin-top:3px}
+
+/* INFO BOX */
+.info-box{background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:14px 18px;font-size:12px;color:var(--ink2);margin-top:16px}
+.info-box strong{color:var(--ink)}
+
+/* PRESS */
+.press-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px}
+.press-card{background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:12px 14px;box-shadow:var(--sh)}
+.press-date{font-size:10px;color:var(--ink3);font-weight:600;margin-bottom:4px}
+.press-head{font-size:12px;font-weight:600;color:var(--ink);line-height:1.4}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .stat-row,.swot,.prod-grid,.plat-grid,.pillar-row,.phases,.do-dont,.budget-band,.founder-strip,.press-row{grid-template-columns:1fr 1fr}
+  .pillar-row,.phases{grid-template-columns:1fr}
+  .timeline{flex-direction:column;gap:16px}
+  .timeline::before{top:0;bottom:0;left:16px;right:auto;width:2px;height:auto}
+  .tl-item{flex-direction:row;text-align:left;gap:12px;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- STICKY NAV -->
+<div class="hdr">
+  <div class="w">
+    <div class="hdr-inner">
+      <div class="logo">Think<span>41</span></div>
+      <div class="pills">
+        <a class="pill" href="#verdict">Overview</a>
+        <a class="pill" href="#company">Company</a>
+        <a class="pill" href="#products">Products</a>
+        <a class="pill" href="#swot">SWOT</a>
+        <a class="pill" href="#gaps">Gaps</a>
+        <a class="pill" href="#platforms">Platforms</a>
+        <a class="pill" href="#content">Content</a>
+        <a class="pill" href="#founders">Founders</a>
+        <a class="pill" href="#roadmap">Roadmap</a>
+        <a class="pill" href="#metrics">Metrics</a>
+      </div>
+      <button class="btn-theme" onclick="toggleTheme()">☀︎ / ☾</button>
+    </div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section id="verdict">
+  <div class="w">
+    <div class="sec-label">Marketing Quick Brief · June 2026</div>
+    <h2>Think41 at a Glance</h2>
+    <div class="verdict">
+      <p>
+        <strong>World-class product. Near-zero market visibility.</strong> Think41 ships real, production-grade GenAI — ExtraSuite publicly launched March 2026, Foundation Voice open-sourced June 2025, Mindlap in active beta, Dev41 live with Fortune 500 clients. The founders carry serious credibility: they built and sold HashedIn to Deloitte, then exited to build Think41 with the same team. But Think41's website is a client-rendered SPA with <strong>0 indexable pages</strong>, no content engine, no founder visibility online, and no brand presence commensurate with what it's actually building. The gap between what exists and what the world sees is the entire marketing opportunity.
+      </p>
+    </div>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-n red">0</div>
+        <div class="stat-l">Indexable pages on think41.com (SPA — invisible to Google)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">4</div>
+        <div class="stat-l">Products live or in active beta as of June 2026</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n grn">100+</div>
+        <div class="stat-l">Team members; 100+ ExtraSuite workflows run internally daily</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">~18 mo</div>
+        <div class="stat-l">Window before enterprise AI market consolidates around established names</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANY -->
+<section id="company">
+  <div class="w">
+    <div class="sec-label">Background</div>
+    <h2>What Think41 Is</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div>
+          <div class="tl-year">2010</div>
+          <div class="tl-text">Founders start HashedIn — engineering services firm</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div>
+          <div class="tl-year">Dec 2020</div>
+          <div class="tl-text">Deloitte acquires HashedIn. All four founders become Deloitte Managing Directors</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div>
+          <div class="tl-year">Nov 2024</div>
+          <div class="tl-text">Founders exit Deloitte. Launch Think41 — full-stack GenAI services + products company</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot red"></div>
+        <div>
+          <div class="tl-year">2025–26</div>
+          <div class="tl-text">100+ team, 4 products shipped, Fortune 500 clients, two open-source releases</div>
+        </div>
+      </div>
+    </div>
+    <div class="founder-strip">
+      <div class="founder-card"><div class="founder-name">Sripathi Krishnan</div><div class="founder-note">Co-Founder · Creator of ExtraSuite</div></div>
+      <div class="founder-card"><div class="founder-name">Himanshu Varshney</div><div class="founder-note">Co-Founder · Runs enterprise delivery</div></div>
+      <div class="founder-card"><div class="founder-name">Anshuman Singh</div><div class="founder-note">Co-Founder</div></div>
+      <div class="founder-card"><div class="founder-name">Harshit Singhal</div><div class="founder-note">Co-Founder</div></div>
+    </div>
+    <div class="info-box" style="margin-top:12px">
+      <strong>Key insight:</strong> All four founders co-built HashedIn for a decade, scaled it to acquisition, worked inside Deloitte as MDs, then left together to start Think41. This is not a first-time team — it is a proven operator team making a deliberate second bet on GenAI. That story is underutilised in Think41's current market presence.
+    </div>
+
+    <!-- PRESS TIMELINE -->
+    <h3 style="margin-top:28px;margin-bottom:12px">Press Timeline</h3>
+    <div class="press-row">
+      <div class="press-card">
+        <div class="press-date">November 2024</div>
+        <div class="press-head">Think41 launches — "Redefining Enterprise Transformation with GenAI" (Business Standard)</div>
+      </div>
+      <div class="press-card">
+        <div class="press-date">June 2025</div>
+        <div class="press-head">Foundation Voice open-sourced — "Think41 Joins India's Open-Source Movement" (PR Newswire, Tribune, Business Standard)</div>
+      </div>
+      <div class="press-card">
+        <div class="press-date">March 2026</div>
+        <div class="press-head">ExtraSuite publicly launched — "The AI Tool That Brings Your Whole Context to Google Workspace" (Business Standard, Tribune)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="w">
+    <div class="sec-label">Portfolio</div>
+    <h2>Think41's 4 Products</h2>
+    <div class="prod-grid">
+      <div class="prod-card">
+        <div class="prod-date">Launched publicly March 17, 2026</div>
+        <div class="prod-head">
+          <h3>ExtraSuite</h3>
+          <span class="badge live">LIVE · OPEN SOURCE</span>
+        </div>
+        <div class="prod-desc">Open-source AI execution layer for Google Workspace. Lets AI agents (Claude, Codex, Gemini) safely operate inside Gmail, Docs, Sheets, Slides, Calendar, Apps Script — with governance built in. Service-account-per-user identity, short-lived scoped tokens, full audit trail via Google version history. 100+ team members run 100+ workflows on it internally.</div>
+        <div class="prod-quote">"Many AI projects fail at the same point: the model can generate content, but cannot reliably write it back into the system of record. We built ExtraSuite so agents can focus on the task while execution, controls, and auditability stay consistent." — Sripathi Krishnan</div>
+        <span class="prod-tag">github.com/think41/extrasuite</span><span class="prod-tag">extrasuite.think41.com</span>
+      </div>
+      <div class="prod-card">
+        <div class="prod-date">Open-sourced June 2025</div>
+        <div class="prod-head">
+          <h3>Foundation Voice</h3>
+          <span class="badge open">OPEN SOURCE</span>
+        </div>
+        <div class="prod-desc">Enterprise voice AI platform. SIP calling, CRM sync, cloud or on-prem deployable. Built for high-stakes, production voice deployments at scale. Partners: Microsoft, Deepgram, ElevenLabs, Smallest.ai. One of the first enterprise voice AI platforms open-sourced in India.</div>
+        <span class="prod-tag">Voice AI</span><span class="prod-tag">On-Prem</span><span class="prod-tag">CRM Sync</span><span class="prod-tag">India OSS</span>
+      </div>
+      <div class="prod-card">
+        <div class="prod-date">Active beta · 225+ engineers on waitlist</div>
+        <div class="prod-head">
+          <h3>Mindlap</h3>
+          <span class="badge beta">BETA</span>
+        </div>
+        <div class="prod-desc">AI engineering orchestration platform. "Omni" orchestrator coordinates AI agents across complex dev workflows. Claims: 5× agent hours per human engineer, 50% review time reduction, 24/7 autonomous execution. Available at mindlap.ai.</div>
+        <span class="prod-tag">AI Agents</span><span class="prod-tag">Dev Orchestration</span><span class="prod-tag">mindlap.ai</span>
+      </div>
+      <div class="prod-card">
+        <div class="prod-date">Live · Fortune 500 clients</div>
+        <div class="prod-head">
+          <h3>Dev41 + Autopods</h3>
+          <span class="badge live">LIVE · PROPRIETARY</span>
+        </div>
+        <div class="prod-desc">AI-driven engineering delivery pods. Combines human engineers + AI agents into structured delivery units. Think41's primary commercial services vehicle. Proprietary. Already generating revenue from large enterprise clients. Boot41 talent program feeds this pipeline.</div>
+        <span class="prod-tag">Proprietary</span><span class="prod-tag">Enterprise</span><span class="prod-tag">Fortune 500</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SWOT -->
+<section id="swot">
+  <div class="w">
+    <div class="sec-label">Honest Assessment</div>
+    <h2>Think41's SWOT</h2>
+    <div class="swot">
+      <div class="swot-card s">
+        <div class="swot-title">Strengths</div>
+        <ul class="swot-list">
+          <li>Founders with proven exit: HashedIn → Deloitte acquisition</li>
+          <li>Dual model: services revenue funds product R&D</li>
+          <li>2 open-source products build community credibility</li>
+          <li>Fortune 500 client validation before any marketing spend</li>
+          <li>100+ team eating own dog food with ExtraSuite</li>
+          <li>Unfunded — no investor pressure, founder-controlled</li>
+        </ul>
+      </div>
+      <div class="swot-card w">
+        <div class="swot-title">Weaknesses</div>
+        <ul class="swot-list">
+          <li>think41.com = 0 indexed pages (SPA, invisible to Google)</li>
+          <li>Founders have near-zero public LinkedIn/social presence</li>
+          <li>No content engine, no editorial calendar, no blog</li>
+          <li>No analyst relationships (Gartner, Forrester, IDC)</li>
+          <li>Product brands not connected to Think41 parent brand</li>
+          <li>No dedicated marketing function yet</li>
+        </ul>
+      </div>
+      <div class="swot-card o">
+        <div class="swot-title">Opportunities</div>
+        <ul class="swot-list">
+          <li>Enterprise AI adoption wave — 18-month first-mover window</li>
+          <li>Open-source community = zero-cost inbound pipeline</li>
+          <li>Founder story is genuinely differentiated and underused</li>
+          <li>Hacker News, GitHub, dev communities not yet tapped</li>
+          <li>BFSI, SaaS, manufacturing verticals actively seeking partners</li>
+          <li>India's open-source movement gaining global attention</li>
+        </ul>
+      </div>
+      <div class="swot-card t">
+        <div class="swot-title">Threats</div>
+        <ul class="swot-list">
+          <li>Microsoft, Google, Salesforce entering same enterprise AI layer</li>
+          <li>Competitors moving faster on content, SEO, and community</li>
+          <li>"AI fatigue" — noise drowning real-signal vendors</li>
+          <li>Talent war: engineers who can also communicate externally</li>
+          <li>Open-source forks could dilute product differentiation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GAPS -->
+<section id="gaps">
+  <div class="w">
+    <div class="sec-label">Priority Issues</div>
+    <h2>7 Marketing Gaps — Ranked by Severity</h2>
+    <div class="gap-list">
+      <div class="gap-item">
+        <div class="gap-dot crit"></div>
+        <div>
+          <div class="gap-name">think41.com is a ghost to Google</div>
+          <div class="gap-fix">The site is a Vite/React SPA — every page renders client-side, so crawlers see nothing. Fix: rebuild with Next.js/Gatsby SSG or add a static layer. Target: 50+ indexed pages in 90 days.</div>
+        </div>
+        <div class="gap-sev crit">Critical</div>
+      </div>
+      <div class="gap-item">
+        <div class="gap-dot crit"></div>
+        <div>
+          <div class="gap-name">Founders are invisible online</div>
+          <div class="gap-fix">Four credible, story-rich founders with zero regular LinkedIn presence. Fix: ghost-write if needed, 2 posts/week per founder. The HashedIn → Deloitte → Think41 arc is a compelling narrative that sells itself.</div>
+        </div>
+        <div class="gap-sev crit">Critical</div>
+      </div>
+      <div class="gap-item">
+        <div class="gap-dot crit"></div>
+        <div>
+          <div class="gap-name">No content engine exists</div>
+          <div class="gap-fix">No blog. No newsletter. No editorial calendar. Think41 ships products and sends press releases — but creates no ongoing content that builds authority or drives inbound. Fix: 4 blog posts/month + repurpose into LinkedIn + newsletter.</div>
+        </div>
+        <div class="gap-sev crit">Critical</div>
+      </div>
+      <div class="gap-item">
+        <div class="gap-dot crit"></div>
+        <div>
+          <div class="gap-name">Open-source community not activated</div>
+          <div class="gap-fix">ExtraSuite and Foundation Voice are on GitHub but have no community layer. No Discord, no GitHub Discussions, no "Good First Issue" labels, no Show HN posts. Fix: community setup + Show HN launch for both repos.</div>
+        </div>
+        <div class="gap-sev crit">Critical</div>
+      </div>
+      <div class="gap-item">
+        <div class="gap-dot sig"></div>
+        <div>
+          <div class="gap-name">No media or analyst relationships</div>
+          <div class="gap-fix">Press releases go on Business Standard but no ongoing journalist or analyst relationships. Fix: identify 5 India tech journalists at ET, Inc42, YourStory. Brief them quarterly. Target 2 earned features in 6 months.</div>
+        </div>
+        <div class="gap-sev sig">Significant</div>
+      </div>
+      <div class="gap-item">
+        <div class="gap-dot sig"></div>
+        <div>
+          <div class="gap-name">Product names don't connect to Think41 brand</div>
+          <div class="gap-fix">ExtraSuite, Foundation Voice, Mindlap, Dev41 — four products, four visual identities, no brand architecture tying them to Think41. Fix: "ExtraSuite by Think41" framing + unified design system.</div>
+        </div>
+        <div class="gap-sev sig">Significant</div>
+      </div>
+      <div class="gap-item">
+        <div class="gap-dot mod"></div>
+        <div>
+          <div class="gap-name">Zero events and conference presence</div>
+          <div class="gap-fix">No speaking slots, no booths, no panels. Fix: target SaaS Insider India, NASSCOM, Bengaluru Tech Summit, Google Next India. Speak — don't just exhibit.</div>
+        </div>
+        <div class="gap-sev mod">Moderate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORMS -->
+<section id="platforms">
+  <div class="w">
+    <div class="sec-label">Channel Strategy</div>
+    <h2>Where Think41 Should Show Up</h2>
+    <div class="plat-grid">
+      <div class="plat"><span class="p-num p1">P1 — Immediately</span><div class="plat-name">LinkedIn</div><div class="plat-why">Founder posts + company page. Primary B2B channel for India enterprise buyers and ecosystem.</div></div>
+      <div class="plat"><span class="p-num p1">P1 — Immediately</span><div class="plat-name">GitHub</div><div class="plat-why">ExtraSuite + Foundation Voice repos. Stars, forks, and contributors are public credibility signals.</div></div>
+      <div class="plat"><span class="p-num p1">P1 — Immediately</span><div class="plat-name">Think41 Blog</div><div class="plat-why">SEO engine. Technical depth posts rank and build authority over time. First content should be live within 30 days.</div></div>
+      <div class="plat"><span class="p-num p2">P2 — 30 days</span><div class="plat-name">Hacker News</div><div class="plat-why">Show HN for ExtraSuite and Foundation Voice. Developer audience is the ideal first-adopter and amplifier base.</div></div>
+      <div class="plat"><span class="p-num p2">P2 — 30 days</span><div class="plat-name">YouTube</div><div class="plat-why">Product demo walkthroughs, founder explainers. Long-form trust builder that compounds over time.</div></div>
+      <div class="plat"><span class="p-num p2">P2 — 30 days</span><div class="plat-name">Newsletter</div><div class="plat-why">"AI in the wild" weekly for CXO audience. Owned channel — zero algorithm dependency.</div></div>
+      <div class="plat"><span class="p-num p3">P3 — 60 days</span><div class="plat-name">Twitter / X</div><div class="plat-why">Real-time tech commentary. Founder opinion posts. Lower ROI than LinkedIn for B2B India but builds developer mindshare.</div></div>
+      <div class="plat"><span class="p-num p3">P3 — 60 days</span><div class="plat-name">Product Hunt</div><div class="plat-why">Global launch event for ExtraSuite + Mindlap. Dev/tech community traction and early adopter pipeline.</div></div>
+      <div class="plat"><span class="p-num p3">P3 — 60 days</span><div class="plat-name">Podcasts</div><div class="plat-why">Founder guest appearances — Decoding Startups, Prime Venture Podcast, ET Making It Big. Trust at scale.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section id="content">
+  <div class="w">
+    <div class="sec-label">Content Strategy</div>
+    <h2>4 Content Pillars for Think41</h2>
+    <div class="pillar-row">
+      <div class="pillar">
+        <div class="pillar-icon">🔧</div>
+        <div class="pillar-name">Build in Public</div>
+        <div class="pillar-ex">How ExtraSuite was built. Lessons from open-sourcing Foundation Voice. Real engineering decisions and mistakes. Makes Think41 a practitioner brand, not a vendor brand.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">💡</div>
+        <div class="pillar-name">AI Practitioner Takes</div>
+        <div class="pillar-ex">Founder POV on LLMs, agents, agentic enterprise workflows. Sharp, original opinion — not news aggregation. The market is full of AI commentary; Think41's is credible because they're shipping.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">📊</div>
+        <div class="pillar-name">Customer Outcomes</div>
+        <div class="pillar-ex">Case studies from Fortune 500 deployments. ROI, implementation realities, before/after workflow comparisons. Think41 already has this material — it just hasn't been published.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🏗️</div>
+        <div class="pillar-name">The Founder Journey</div>
+        <div class="pillar-ex">HashedIn → Deloitte → Think41. Why exit a Managing Director role to build again? What "practitioners building for practitioners" actually means in GenAI. A story no competitor can copy.</div>
+      </div>
+    </div>
+    <div class="info-box">
+      <strong>Target cadence:</strong> 4 LinkedIn posts/week (founders combined) · 4 blog posts/month · 1 YouTube demo/month · 1 newsletter/week · 1 open-source release note/month
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDERS VISIBILITY -->
+<section id="founders">
+  <div class="w">
+    <div class="sec-label">Founder Visibility</div>
+    <h2>What Think41's Founders Should (and Shouldn't) Do Online</h2>
+    <div class="do-dont">
+      <div class="do-card">
+        <div class="do-title">✓ Do</div>
+        <ul class="dd-list">
+          <li>Post real opinions on AI/LLMs — even contrarian ones</li>
+          <li>Document what they're building and why in real-time</li>
+          <li>Share what didn't work — authenticity builds trust faster than polish</li>
+          <li>Speak at SaaS Insider, NASSCOM, Bengaluru tech meetups</li>
+          <li>Share customer outcomes with permission (even anonymised)</li>
+          <li>Engage on comments — even 1 sentence reply builds community</li>
+        </ul>
+      </div>
+      <div class="dont-card">
+        <div class="dont-title">✗ Don't</div>
+        <ul class="dd-list">
+          <li>Post only product announcements and press releases</li>
+          <li>Use generic AI-generated LinkedIn content</li>
+          <li>Go silent for months between posts (consistency > virality)</li>
+          <li>Avoid taking positioning stands — "we're different" needs proof</li>
+          <li>Leave comments unanswered — signals disengagement</li>
+          <li>Over-invest in Twitter before LinkedIn is consistent</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="w">
+    <div class="sec-label">Execution Plan</div>
+    <h2>What a Marketing Function Should Do — Month by Month</h2>
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-label">Days 1–30</div>
+        <div class="phase-title">Fix the Foundation</div>
+        <ul class="phase-items">
+          <li>Audit + fix website (SSG rebuild or static render layer)</li>
+          <li>Launch blog — first 4 posts live</li>
+          <li>Optimise all 4 founder LinkedIn profiles</li>
+          <li>Clean up GitHub READMEs for both OSS repos</li>
+          <li>Write brand voice + messaging guide</li>
+          <li>Set content calendar for 90 days</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-label">Days 31–60</div>
+        <div class="phase-title">Launch Content Engine</div>
+        <ul class="phase-items">
+          <li>2 founder LinkedIn posts/week each</li>
+          <li>Show HN posts for ExtraSuite + Foundation Voice</li>
+          <li>Newsletter launched — first 4 issues live</li>
+          <li>First YouTube product walkthrough published</li>
+          <li>PR outreach to Inc42, YourStory, Economic Times Tech</li>
+          <li>GitHub: Discussions, Good First Issue labels, Discord setup</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-label">Days 61–90</div>
+        <div class="phase-title">Build Pipeline</div>
+        <ul class="phase-items">
+          <li>1 earned media feature published</li>
+          <li>Conference speaker slot confirmed</li>
+          <li>SEO: 20+ pages indexed, 10+ keywords in top 20</li>
+          <li>First customer case study live on website</li>
+          <li>500+ newsletter subscribers</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-label">Days 91–180</div>
+        <div class="phase-title">Scale and Measure</div>
+        <ul class="phase-items">
+          <li>Product Hunt launches for ExtraSuite + Mindlap</li>
+          <li>Analyst briefing (Gartner / Forrester / IDC India)</li>
+          <li>LinkedIn: 5K+ company page followers</li>
+          <li>5+ content-sourced inbound leads/month</li>
+          <li>Founders on 2+ podcasts</li>
+          <li>Full marketing dashboard with weekly metrics review</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS + BUDGET -->
+<section id="metrics">
+  <div class="w">
+    <div class="sec-label">Measurement</div>
+    <h2>What to Track — Targets by Month</h2>
+    <table class="metrics-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Month 3</th>
+          <th>Month 6</th>
+          <th>Month 12</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Indexed pages on think41.com</td><td>50+</td><td>100+</td><td>200+</td></tr>
+        <tr><td>Organic monthly visitors</td><td>500</td><td>2,000</td><td>8,000</td></tr>
+        <tr><td>LinkedIn company followers</td><td>1,000</td><td>3,000</td><td>8,000</td></tr>
+        <tr><td>Avg. founder post impressions</td><td>2,000</td><td>8,000</td><td>25,000</td></tr>
+        <tr><td>GitHub stars (ExtraSuite + FV combined)</td><td>200</td><td>600</td><td>2,000</td></tr>
+        <tr><td>Newsletter subscribers</td><td>300</td><td>800</td><td>2,500</td></tr>
+        <tr><td>Inbound leads from content</td><td>2/mo</td><td>5/mo</td><td>15/mo</td></tr>
+        <tr><td>Earned media mentions</td><td>1</td><td>4</td><td>10</td></tr>
+        <tr><td>Conference speaking slots</td><td>1</td><td>3</td><td>6</td></tr>
+      </tbody>
+    </table>
+    <div class="budget-band">
+      <div class="b-card">
+        <div class="b-label">Lean Budget (1–2 hires)</div>
+        <div class="b-val">₹5L – ₹9L / month</div>
+        <div class="b-sub">Content + SEO hire, tools stack, minimal paid distribution</div>
+      </div>
+      <div class="b-card">
+        <div class="b-label">Full Build (team of 4–6)</div>
+        <div class="b-val">₹8L – ₹21L / month</div>
+        <div class="b-sub">Full team: content, SEO, design, community, events, PR agency</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="text-align:center;padding:32px 0;font-size:11px;color:var(--ink3);border-top:1px solid var(--brd)">
+  Think41 Marketing Quick Brief · June 2026 · For discussion purposes
+</div>
+
+<script>
+function toggleTheme(){
+  const h=document.documentElement;
+  const next=h.getAttribute('data-theme')==='dark'?'light':'dark';
+  h.setAttribute('data-theme',next);
+  localStorage.setItem('t41-brief-theme',next);
+}
+(function(){
+  const s=localStorage.getItem('t41-brief-theme');
+  if(s)document.documentElement.setAttribute('data-theme',s);
+})();
+
+// Active nav pill on scroll
+const pills=document.querySelectorAll('.pill[href]');
+const secs=document.querySelectorAll('section[id]');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting)
+      pills.forEach(p=>p.classList.toggle('active',p.getAttribute('href')==='#'+e.target.id));
+  });
+},{rootMargin:'-35% 0px -60% 0px'});
+secs.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
